@@ -50,10 +50,10 @@
           </config>
           <pods use-frameworks="true">
             <!-- EXAMPLE POD SPECIFICATION-->
-            <pod name="TACS" options=":path => '../../../TACS/TACS.podspec'" />
+            <pod name="TACS" options=":path => '../../../../plugin/TACS/TACS.podspec'" />
             <!--pod name="TACS" path="../TACS" /-->
             <!--pod name="SecureAccessBLE" path="../SecureAccessBLE" /-->
-            <pod name="SecureAccessBLE" options=":path => '../../../SecureAccessBLE/SecureAccessBLE.podspec'" />
+            <pod name="SecureAccessBLE" options=":path => '../../../../plugin/SecureAccessBLE/SecureAccessBLE.podspec'" />
           </pods>
         </podspec>
     </platform>

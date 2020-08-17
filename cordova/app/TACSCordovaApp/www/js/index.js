@@ -31,5 +31,6 @@ function onDeviceReady() {
 
 function lockClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    console.log("lock clicked")
     hufPlugin.executeLockCommand()
 }
