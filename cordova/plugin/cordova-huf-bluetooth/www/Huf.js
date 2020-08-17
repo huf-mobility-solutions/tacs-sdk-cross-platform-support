@@ -9,7 +9,7 @@ module.exports = {
     cordova.exec(successCallback, errorCallback, packageName, 'nameOfTheActionInTheNativeImplementation', [name])
   },
   executeLockCommand: () => {
-    cordova.
+
   },
   sampleFunction2WithPromise: (action, data) => {
     return new Promise((resolve, reject) => {
