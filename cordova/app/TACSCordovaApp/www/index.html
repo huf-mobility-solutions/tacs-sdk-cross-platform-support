@@ -42,14 +42,15 @@
 
 <body>
     <div class="app">
-        <h1>Apache Cordova</h1>
         <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
+            <button id="connect">CONNECT</button>
+            <button id="disconnect">DISCONNECT</button>
             <button id="lock">LOCK</button>
             <button id="unlock">UNLOCK</button>
             <button id="immobilizerOn">IMMOBILIZER ON</button>
             <button id="immobilierOff">IMMOBILIZER OFF</button>
+            <p class="event listening">Preparing</p>
+            <p class="event received">Connection status</p>
         </div>
     </div>
     <script type="text/javascript" src="../plugins/com.playmoove.huf/www/Huf.js"></script>

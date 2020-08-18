@@ -10,8 +10,27 @@ module.exports = {
   },
   executeLockCommand: () => {
     return new Promise((resolve, reject) => {
-      console.log("executeLockCommand")
       cordova.exec(resolve, reject, packageName, 'executeLock', [])
+    })
+  },
+  executeUnlockCommand: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'executeUnlock', [])
+    })
+  },
+  connectToCAM: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'connectBle', [])
+    })
+  },
+  disconnectFromCAM: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'disconnectBle', [])
+    })
+  },
+  buildKeyring: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'buildKeyring', [])
     })
   }
 }
