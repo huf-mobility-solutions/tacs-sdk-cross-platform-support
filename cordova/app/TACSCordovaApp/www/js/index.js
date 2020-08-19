@@ -24,6 +24,8 @@ document.getElementById("lock").addEventListener("click", lockButtonClick);
 document.getElementById("unlock").addEventListener("click", unlockButtonClick);
 document.getElementById("connect").addEventListener("click", connectButtonClick);
 document.getElementById("disconnect").addEventListener("click", disconnectButtonClick);
+document.getElementById("immobilizerOn").addEventListener("click", immobilizerOnButtonClick);
+document.getElementById("immobilizerOff").addEventListener("click", immobilizerOffButtonClick);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
@@ -58,8 +60,18 @@ function disconnectButtonClick() {
     hufPlugin.disconnectFromCAM()
 }
 
+function immobilizerOnButtonClick() {
+    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    hufPlugin.executeImmobilizerOnCommand()
+}
+
+function immobilizerOffButtonClick() {
+    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    hufPlugin.executeImmobilizerOffCommand()
+}
+
 function getKeyringJson() {
-    var data = {
+    return {
         "tacsLeaseTokenTableVersion": "1576748075346",
         "tacsLeaseTokenTable": [
             {
@@ -161,5 +173,4 @@ function getKeyringJson() {
             }
         ]
     }
-    return data
 }

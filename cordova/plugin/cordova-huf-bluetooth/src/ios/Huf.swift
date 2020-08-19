@@ -89,6 +89,40 @@ import SecureAccessBLE
         // Send the function result back to Cordova.
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
+
+    @objc(executeImmobilizerOn:)
+    func executeImmobilizerOn(command: CDVInvokedUrlCommand) {
+        print("TACS Executing executeImmobilizerOn")
+        
+         tacsManager.vehicleAccessManager.requestFeature(.disableIgnition)
+        tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
+        
+        // Set the plugin result to fail.
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+        
+        // Set the plugin result to succeed.
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
+        
+        // Send the function result back to Cordova.
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+
+    @objc(executeImmobilizerOff:)
+    func executeImmobilizerOff(command: CDVInvokedUrlCommand) {
+        print("TACS Executing executeImmobilizerOff")
+        
+        tacsManager.vehicleAccessManager.requestFeature(.enableIgnition)
+        tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
+        
+        // Set the plugin result to fail.
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+        
+        // Set the plugin result to succeed.
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
+        
+        // Send the function result back to Cordova.
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
     
     @objc(executeUnlock:)
     func executeUnlock(command: CDVInvokedUrlCommand) {

@@ -18,6 +18,16 @@ module.exports = {
       cordova.exec(resolve, reject, packageName, 'executeUnlock', [])
     })
   },
+  executeImmobilizerOnCommand: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'executeImmobilizerOn', [])
+    })
+  },
+  executeImmobilizerOffCommand: () => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, packageName, 'executeImmobilizerOff', [])
+    })
+  },
   connectToCAM: () => {
     return new Promise((resolve, reject) => {
       cordova.exec(resolve, reject, packageName, 'connectBle', [])
