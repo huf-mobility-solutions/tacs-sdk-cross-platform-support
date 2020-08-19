@@ -24,8 +24,6 @@
     }
   },
   "dependencies": {
-    "fetch": "^1.1.0",
-    "fs": "0.0.1-security",
-    "require": "^2.4.20"
+    "fs": "0.0.1-security"
   }
 }

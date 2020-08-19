@@ -4,24 +4,24 @@ import SecureAccessBLE
 @objc(Huf) class Huf : CDVPlugin {
 
   private var tacsManager: TACSManager!
-  let disposeBag = DisposeBag()
     
   @objc(buildKeyring:) 
   func buildKeyring(command: CDVInvokedUrlCommand) { 
 
     print("Building Keyring")
 
-    //let keyRing = TACSKeyRingProvider.keyRing()
-    var vehicleAccessGrantId: String = "MySampleAccessGrantId"
-        
+    let vehicleAccessGrantId: String = "MySampleAccessGrantId"
     let queue = DispatchQueue(label: "com.hufsm.blehandling")
     tacsManager = TACSManager(queue: queue)
+    let json = command.argument(at: 0) as! String
+    let data = json.data(using: .utf8)
+    let keyRing = try! JSONDecoder().decode(TACSKeyRing.self, from: data!)
     
-    //registerSubscriptions()
+    registerSubscriptions()
         
     // Prepare tacsmanager with vehicleAccessGrantId and appropriate keyring
-   // let useAccessGrantResult = tacsManager.useAccessGrant(with: vehicleAccessGrantId, from: keyRing)
-   // assert(useAccessGrantResult)
+    let useAccessGrantResult = tacsManager.useAccessGrant(with: vehicleAccessGrantId, from: keyRing)
+    assert(useAccessGrantResult)
 
     // Set the plugin result to fail.
     var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
@@ -105,10 +105,12 @@ import SecureAccessBLE
     self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
   }
     
-    /*
-    private func registerSubscriptions() {
-       // Subscribe to bluetooth state signal
-       tacsManager.bluetoothState.subscribe { [weak self] bluetoothState in
+    
+  private func registerSubscriptions() {
+    let disposeBag = DisposeBag()
+
+    // Subscribe to bluetooth state signal
+    tacsManager.bluetoothState.subscribe { [weak self] bluetoothState in
            self?.onBluetoothStateChange(bluetoothState)
        }.disposed(by: disposeBag)
        
@@ -150,26 +152,27 @@ import SecureAccessBLE
            .disposed(by: disposeBag)
     }
     
-    private func onBluetoothStateChange(_ bluetoothState: BluetoothState) {
-        // Reflect on ble device change by providing necessary feedback to the user.
-        // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
-        DispatchQueue.main.async { [weak self] in
-            
-        }
+  private func onBluetoothStateChange(_ bluetoothState: BluetoothState) {
+    // Reflect on ble device change by providing necessary feedback to the user.
+    // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
+    DispatchQueue.main.async { [weak self] in
+      print("Bluetooth state is")
+      print(bluetoothState)
     }
+  }
     
-    private func onDiscoveryChange(_ discoveryChange: TACS.DiscoveryChange) {
+  private func onDiscoveryChange(_ discoveryChange: TACS.DiscoveryChange) {
         switch discoveryChange.action {
         case .discoveryStarted(_):
             DispatchQueue.main.async { [weak self] in
-                
+                print("Discovering...")
             }
         case .discovered(_):
             // If the vehicle is discovered, we start connecting to the vehicle.
             tacsManager.connect()
         case .discoveryFailed:
             DispatchQueue.main.async { [weak self] in
-               
+               print("Discovering failed...")
             }
         default:
             break
@@ -263,5 +266,5 @@ import SecureAccessBLE
             case .initial: break
             }
         }
-    }*/
+    }
 }
