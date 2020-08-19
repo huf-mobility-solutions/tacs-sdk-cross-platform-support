@@ -17,42 +17,44 @@
  * under the License.
  */
 
-const { connectToCAM, disconnectFromCAM } = require("../../../../plugin/cordova-huf-bluetooth/www/Huf");
-
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
-document.getElementById("lock").addEventListener("click", lockClick);
-document.getElementById("unlock").addEventListener("click", unlockClick);
-document.getElementById("connect").addEventListener("click", connectClick);
-document.getElementById("disconnect").addEventListener("click", disconnectClick);
+document.getElementById("lock").addEventListener("click", lockButtonClick);
+document.getElementById("unlock").addEventListener("click", unlockButtonClick);
+document.getElementById("connect").addEventListener("click", connectButtonClick);
+document.getElementById("disconnect").addEventListener("click", disconnectButtonClick);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.buildKeyring()
+
+    //Get the json
+    fetch("/mock_keyring.json")
+        .then(response => response.text())
+        .then(json => hufPlugin.buildKeyring(json));
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 }
 
-function lockClick() {
+function lockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     hufPlugin.executeLockCommand()
 }
 
-function unlockClick() {
+function unlockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     hufPlugin.executeUnlockCommand()
 }
 
-function connectClick() {
+function connectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     hufPlugin.connectToCAM()
 }
 
-function disconnectClick() {
+function disconnectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     hufPlugin.disconnectFromCAM()
 }

@@ -28,9 +28,10 @@ module.exports = {
       cordova.exec(resolve, reject, packageName, 'disconnectBle', [])
     })
   },
-  buildKeyring: () => {
+  buildKeyring: (keyringData) => {
     return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'buildKeyring', [])
+      console.log(keyringData)
+      cordova.exec(resolve, reject, packageName, 'buildKeyring', [keyringData])
     })
   }
 }

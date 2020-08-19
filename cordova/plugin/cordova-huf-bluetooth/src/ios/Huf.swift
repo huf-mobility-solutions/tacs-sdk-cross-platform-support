@@ -1,24 +1,18 @@
 import TACS
 import SecureAccessBLE
 
-class TACSKeyRingProvider {
-    static func keyRing() -> TACSKeyRing {
-        let url = Bundle.main.url(forResource: "mock_keyring", withExtension: "json")!
-        let json = try! String(contentsOf: url).data(using: .utf8)!
-        return try! JSONDecoder().decode(TACSKeyRing.self, from: json)
-    }
-}
-
 @objc(Huf) class Huf : CDVPlugin {
 
-  var tacsManager: TACSManager!
-  //let disposeBag = DisposeBag()
-    
-  let keyRing = TACSKeyRingProvider.keyRing()
-  var vehicleAccessGrantId: String = "MySampleAccessGrantId"
+  private var tacsManager: TACSManager!
+  let disposeBag = DisposeBag()
     
   @objc(buildKeyring:) 
   func buildKeyring(command: CDVInvokedUrlCommand) { 
+
+    print("Building Keyring")
+
+    //let keyRing = TACSKeyRingProvider.keyRing()
+    var vehicleAccessGrantId: String = "MySampleAccessGrantId"
         
     let queue = DispatchQueue(label: "com.hufsm.blehandling")
     tacsManager = TACSManager(queue: queue)
@@ -26,8 +20,8 @@ class TACSKeyRingProvider {
     //registerSubscriptions()
         
     // Prepare tacsmanager with vehicleAccessGrantId and appropriate keyring
-    let useAccessGrantResult = tacsManager.useAccessGrant(with: vehicleAccessGrantId, from: keyRing)
-    assert(useAccessGrantResult)
+   // let useAccessGrantResult = tacsManager.useAccessGrant(with: vehicleAccessGrantId, from: keyRing)
+   // assert(useAccessGrantResult)
 
     // Set the plugin result to fail.
     var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
