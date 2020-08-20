@@ -60,15 +60,20 @@ import SecureAccessBLE
         // Disconnect
         guard .disconnected != tacsManager.connectionChange.state else { return }
         tacsManager.disconnect()
+    }
+
+    @objc(executeLocation:)
+    func executeLocation(command: CDVInvokedUrlCommand) {
+        print("TACS execute Location")
         
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+        tacsManager.telematicsManager.requestLocationData()
+    }
+
+    @objc(executeTelematics:)
+    func executeTelematics(command: CDVInvokedUrlCommand) {
+        print("TACS execute Telematics")
         
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        tacsManager.telematicsManager.requestTelematicsData([.odometer, .fuelLevelAbsolute, .fuelLevelPercentage])
     }
     
     @objc(executeLock:)
@@ -77,32 +82,14 @@ import SecureAccessBLE
         
         tacsManager.vehicleAccessManager.requestFeature(.lock)
         tacsManager.vehicleAccessManager.requestFeature(.lockStatus)
-        
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
 
     @objc(executeImmobilizerOn:)
     func executeImmobilizerOn(command: CDVInvokedUrlCommand) {
         print("TACS Executing executeImmobilizerOn")
         
-         tacsManager.vehicleAccessManager.requestFeature(.disableIgnition)
+        tacsManager.vehicleAccessManager.requestFeature(.disableIgnition)
         tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
-        
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
 
     @objc(executeImmobilizerOff:)
@@ -111,15 +98,6 @@ import SecureAccessBLE
         
         tacsManager.vehicleAccessManager.requestFeature(.enableIgnition)
         tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
-        
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
     
     @objc(executeUnlock:)
@@ -128,15 +106,6 @@ import SecureAccessBLE
         
         tacsManager.vehicleAccessManager.requestFeature(.unlock)
         tacsManager.vehicleAccessManager.requestFeature(.lockStatus)
-        
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
     
     private func registerSubscriptions() {

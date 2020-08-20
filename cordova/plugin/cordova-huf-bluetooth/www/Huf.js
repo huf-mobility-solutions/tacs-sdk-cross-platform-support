@@ -13,6 +13,14 @@ module.exports = {
     cordova.exec(success, fail, packageName, 'registerCallbackId', [])
     cordova.exec(success, fail, packageName, 'executeUnlock', [])
   },
+  executeLocationCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeLocation', [])
+  },
+  executeTelematicsCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeTelematics', [])
+  },
   executeImmobilizerOnCommand: (success, fail) => {
     cordova.exec(success, fail, packageName, 'registerCallbackId', [])
     cordova.exec(success, fail, packageName, 'executeImmobilizerOn', [])

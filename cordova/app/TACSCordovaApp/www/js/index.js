@@ -26,6 +26,8 @@ document.getElementById("connect").addEventListener("click", connectButtonClick)
 document.getElementById("disconnect").addEventListener("click", disconnectButtonClick);
 document.getElementById("immobilizerOn").addEventListener("click", immobilizerOnButtonClick);
 document.getElementById("immobilizerOff").addEventListener("click", immobilizerOffButtonClick);
+document.getElementById("location").addEventListener("click", locationButtonClick);
+document.getElementById("telematics").addEventListener("click", telematicsButtonClick);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
@@ -105,6 +107,28 @@ function immobilizerOffButtonClick() {
         document.getElementById("engineStatus").textContent = "Failure"
     }
     hufPlugin.executeImmobilizerOffCommand(success, fail)
+}
+
+function locationButtonClick() {
+    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    var success = function () {
+        document.getElementById("locationStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("locationStatus").textContent = "Failure"
+    }
+    hufPlugin.executeLocationCommand(success, fail)
+}
+
+function telematicsButtonClick() {
+    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    var success = function () {
+        document.getElementById("telematicsStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("telematicsStatus").textContent = "Failure"
+    }
+    hufPlugin.executeTelematicsCommand(success, fail)
 }
 
 function getKeyringJson() {
