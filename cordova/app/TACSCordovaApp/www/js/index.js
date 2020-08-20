@@ -29,7 +29,6 @@ document.getElementById("immobilizerOff").addEventListener("click", immobilizerO
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
 
     //Get the json
@@ -42,32 +41,70 @@ function onDeviceReady() {
 
 function lockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.executeLockCommand()
+    var successLock = function () {
+        console.log("Success lock")
+        document.getElementById("doorStatus").textContent = success.arguments[0]
+    }
+    var failLock = function () {
+        document.getElementById("doorStatus").textContent = "Failure"
+    }
+    hufPlugin.executeLockCommand(successLock, failLock)
 }
 
 function unlockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.executeUnlockCommand()
+    var successUnlock = function () {
+        console.log("Success unlock")
+        document.getElementById("doorStatus").textContent = success.arguments[0]
+    }
+    var failUnlock = function () {
+        document.getElementById("doorStatus").textContent = "Failure"
+    }
+    hufPlugin.executeUnlockCommand(successUnlock, failUnlock)
 }
 
 function connectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.connectToCAM()
+    var success = function () {
+        document.getElementById("connectionStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("connectionStatus").textContent = "Failure"
+    }
+    hufPlugin.connectToCAM(success, fail)
 }
 
 function disconnectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.disconnectFromCAM()
+    var success = function () {
+        document.getElementById("connectionStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("connectionStatus").textContent = "Failure"
+    }
+    hufPlugin.disconnectFromCAM(success, fail)
 }
 
 function immobilizerOnButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.executeImmobilizerOnCommand()
+    var success = function () {
+        document.getElementById("engineStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("engineStatus").textContent = "Failure"
+    }
+    hufPlugin.executeImmobilizerOnCommand(success, fail)
 }
 
 function immobilizerOffButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    hufPlugin.executeImmobilizerOffCommand()
+    var success = function () {
+        document.getElementById("engineStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("engineStatus").textContent = "Failure"
+    }
+    hufPlugin.executeImmobilizerOffCommand(success, fail)
 }
 
 function getKeyringJson() {

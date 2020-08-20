@@ -5,6 +5,13 @@ import SecureAccessBLE
     
     private var tacsManager: TACSManager!
     private var disposeBag: DisposeBag!
+    private var callbackId: String!
+    
+    @objc(registerCallbackId:)
+    func registerCallbackId(command: CDVInvokedUrlCommand) {
+        print("Registering callback id")
+        callbackId = command.callbackId
+    }
     
     @objc(buildKeyring:)
     func buildKeyring(command: CDVInvokedUrlCommand) {
@@ -37,27 +44,18 @@ import SecureAccessBLE
     
     @objc(connectBle:)
     func connectBle(command: CDVInvokedUrlCommand) {
-        print("TACS Connecting BLE")
+        print("TACS Connect BLE requetsed")
         
         // Connect
         guard .poweredOn == tacsManager.bluetoothState.state else { return }
         if case .connected = tacsManager.connectionChange.state { return }
         // Start scanning for vehicles
         tacsManager.startScanningWithTimeout()
-        
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
     
     @objc(disconnectBle:)
     func disconnectBle(command: CDVInvokedUrlCommand) {
-        print("TACS Disconnecting BLE")
+        print("TACS Disconnect BLE requested")
         
         // Disconnect
         guard .disconnected != tacsManager.connectionChange.state else { return }
@@ -141,7 +139,6 @@ import SecureAccessBLE
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
     
-    
     private func registerSubscriptions() {
         
         // Subscribe to bluetooth state signal
@@ -175,11 +172,6 @@ import SecureAccessBLE
         tacsManager.telematicsManager.locationDataChange.subscribe { [weak self] locationDataChange in
             self?.onLocationDataChange(locationDataChange)
         }.disposed(by: disposeBag)
-        
-        //Subscribe to keyholder state change signal
-        tacsManager.keyholderManager.keyholderChange.subscribe { [weak self] change  in
-            self?.onKeyholderStatusChange(change)
-        }.disposed(by: disposeBag)
     }
     
     private func onBluetoothStateChange(_ bluetoothState: BluetoothState) {
@@ -192,21 +184,20 @@ import SecureAccessBLE
     }
     
     private func onDiscoveryChange(_ discoveryChange: TACS.DiscoveryChange) {
+        var discoveryStatus: String = ""
         switch discoveryChange.action {
         case .discoveryStarted(_):
-            DispatchQueue.main.async { [weak self] in
-                print("Discovering...")
-            }
+            discoveryStatus = "Searching"
         case .discovered(_):
             // If the vehicle is discovered, we start connecting to the vehicle.
+            discoveryStatus = "Connecting"
             tacsManager.connect()
         case .discoveryFailed:
-            DispatchQueue.main.async { [weak self] in
-                print("Discovering failed...")
-            }
+            discoveryStatus = "Search Failed"
         default:
             break
         }
+        self.sendEventBackToJs(message: discoveryStatus)
     }
     
     private func onConnectionChange(_ connectionChange: TACS.ConnectionChange) {
@@ -218,43 +209,46 @@ import SecureAccessBLE
         case .disconnected: status = "Disconnected"
         }
         
-        DispatchQueue.main.async {
-            print("On connection change")
-            print(status)
-        }
+        self.sendEventBackToJs(message: status)
     }
     
     private func onVehicleAccessFeatureChange(_ vehicleAccessFeatureChange: VehicleAccessFeatureChange) {
-        DispatchQueue.main.async {
+      var doorStatus: String = ""
+        var engineStatus: String = ""
             switch vehicleAccessFeatureChange.action {
             case .initial: break
             case let .requestFeature(feature: feature, accepted: accepted):
                 if (!accepted) {
                     switch feature {
                     case .lock, .unlock, .lockStatus:
-                        break
+                        doorStatus = "Not accepted, queue is full"
+                        self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
-                        break
+                        engineStatus = "Not accepted, queue is full"
+                        self.sendEventBackToJs(message: engineStatus)
                     }
                 }
             case .responseReceived(response: let response):
                 switch response {
                 case let .success(status: status):
                     if case let .ignitionStatus(enabled: enabled) = status {
-                        break
+                        engineStatus = enabled ? "Ignition enabled" : "Ignition disabled"
+                        self.sendEventBackToJs(message: engineStatus)
                     } else if case let .lockStatus(locked: locked) = status {
-                        break
+                        doorStatus = locked ? "Doors locked" : "Doors unlocked"
+                        self.sendEventBackToJs(message: doorStatus)
                     }
                 case let .failure(feature: feature, error: error):
                     switch feature {
                     case .lock, .unlock, .lockStatus:
-                        break
+                        doorStatus = "Error: \(String(describing: error))"
+                        self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
-                        break
+                        engineStatus = "Error: \(String(describing: error))"
+                        self.sendEventBackToJs(message: engineStatus)
                     }
                 }
             }
-        }
     }
     
     private func onLocationDataChange(_ locationDatachange: LocationDataChange) {
@@ -285,17 +279,10 @@ import SecureAccessBLE
         }
     }
     
-    private func onKeyholderStatusChange(_ change: KeyholderStatusChange) {
-        DispatchQueue.main.async {
-            switch change.action {
-            case .discoveryStarted:
-                break
-            case .discovered(let info):
-                break
-            case .failed(let error):
-                break
-            case .initial: break
-            }
-        }
+    private func sendEventBackToJs(message: String) {
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: message);
+        pluginResult?.setKeepCallbackAs(true)
+        self.commandDelegate!.send(pluginResult, callbackId: self.callbackId);
     }
 }

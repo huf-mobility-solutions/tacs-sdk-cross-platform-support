@@ -5,42 +5,32 @@
 const packageName = "Huf"
 
 module.exports = {
-  sampleFunction1: (name, successCallback, errorCallback) => {
-    cordova.exec(successCallback, errorCallback, packageName, 'nameOfTheActionInTheNativeImplementation', [name])
+  executeLockCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeLock', [])
   },
-  executeLockCommand: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'executeLock', [])
-    })
+  executeUnlockCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeUnlock', [])
   },
-  executeUnlockCommand: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'executeUnlock', [])
-    })
+  executeImmobilizerOnCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeImmobilizerOn', [])
   },
-  executeImmobilizerOnCommand: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'executeImmobilizerOn', [])
-    })
+  executeImmobilizerOffCommand: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'executeImmobilizerOff', [])
   },
-  executeImmobilizerOffCommand: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'executeImmobilizerOff', [])
-    })
+  connectToCAM: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'connectBle', [])
   },
-  connectToCAM: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'connectBle', [])
-    })
-  },
-  disconnectFromCAM: () => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'disconnectBle', [])
-    })
+  disconnectFromCAM: (success, fail) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'disconnectBle', [])
   },
   buildKeyring: (keyringData) => {
     return new Promise((resolve, reject) => {
-      console.log(keyringData)
       cordova.exec(resolve, reject, packageName, 'buildKeyring', [keyringData])
     })
   }

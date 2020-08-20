@@ -42,7 +42,7 @@ body {
     background:url(../img/playmoove.png) no-repeat center top; /* 170px x 200px */
     position:absolute;             /* position in the center of the screen */
     left:50%;
-    top:50%;
+    top:25%;
     height:50px;                   /* text area height */
     width:225px;                   /* text area width */
     text-align:center;
@@ -68,6 +68,13 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-size: 15px;
 }
 
 .event {

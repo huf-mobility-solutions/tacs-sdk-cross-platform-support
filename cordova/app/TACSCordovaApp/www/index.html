@@ -43,14 +43,15 @@
 <body>
     <div class="app">
         <div id="deviceready" class="blink">
-            <button id="connect">CONNECT</button>
-            <button id="disconnect">DISCONNECT</button>
-            <button id="lock">LOCK</button>
-            <button id="unlock">UNLOCK</button>
-            <button id="immobilizerOn">IMMOBILIZER ON</button>
-            <button id="immobilizerOff">IMMOBILIZER OFF</button>
-            <p class="event listening">Preparing</p>
-            <p class="event received">Connection status</p>
+            <button class="buttons" id="connect">CONNECT</button>
+            <button class="buttons" id="disconnect">DISCONNECT</button>
+            <button class="buttons" id="lock">LOCK</button>
+            <button class="buttons" id="unlock">UNLOCK</button>
+            <button class="buttons" id="immobilizerOn">IMMOBILIZER ON</button>
+            <button class="buttons" id="immobilizerOff">IMMOBILIZER OFF</button>
+            <p id="connectionStatus">Connection Status</p>
+            <p id="doorStatus">Door Status</p>
+            <p id="engineStatus">Engine Status</p>
         </div>
     </div>
     <script type="text/javascript" src="../plugins/com.playmoove.huf/www/Huf.js"></script>
