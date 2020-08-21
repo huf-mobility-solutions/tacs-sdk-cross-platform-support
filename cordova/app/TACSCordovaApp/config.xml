@@ -13,6 +13,7 @@
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
+    <preference name="Orientation" value="portrait" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
