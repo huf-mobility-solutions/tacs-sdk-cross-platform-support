@@ -39,9 +39,8 @@ body {
 
 /* Portrait layout (default) */
 .app {
-    background:url(../img/playmoove.png) no-repeat center top; /* 170px x 200px */
     position:absolute;             /* position in the center of the screen */
-    left:50%;
+    left:40%;
     top:25%;
     height:50px;                   /* text area height */
     width:225px;                   /* text area width */
@@ -107,6 +106,34 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
+.background {
+    background:url(../img/playmoove.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    background-size: cover;
+    top:25%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(10px, center);
+}
+
+.one {
+    grid-column: 1;
+    grid-row: 1;
+}
+.two {
+    grid-column: 2;
+    grid-row: 1;
+}
 
 @media screen and (prefers-color-scheme: dark) {
     body {

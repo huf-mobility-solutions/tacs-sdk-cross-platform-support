@@ -43,26 +43,26 @@ function onDeviceReady() {
 
 function lockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    var successLock = function () {
+    var success = function () {
         console.log("Success lock")
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
-    var failLock = function () {
+    var fail = function () {
         document.getElementById("doorStatus").textContent = "Failure"
     }
-    hufPlugin.executeLockCommand(successLock, failLock)
+    hufPlugin.executeLockCommand(success, fail)
 }
 
 function unlockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
-    var successUnlock = function () {
+    var success = function () {
         console.log("Success unlock")
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
-    var failUnlock = function () {
+    var fail = function () {
         document.getElementById("doorStatus").textContent = "Failure"
     }
-    hufPlugin.executeUnlockCommand(successUnlock, failUnlock)
+    hufPlugin.executeUnlockCommand(success, fail)
 }
 
 function connectButtonClick() {
@@ -133,103 +133,138 @@ function telematicsButtonClick() {
 
 function getKeyringJson() {
     return {
-        "tacsLeaseTokenTableVersion": "1576748075346",
+        "tacsLeaseTokenTableVersion": "1597993145518",
         "tacsLeaseTokenTable": [
             {
                 "vehicleAccessGrantId": "MySampleAccessGrantId",
                 "leaseToken": {
-                    "leaseId": "95df9275-d069-4d41-bd5b-c76543963a30",
+                    "leaseId": "c80b677f-c1b0-4c1c-823e-adccfa1d1b2a",
                     "userId": "1",
-                    "sorcId": "84766600-deec-4099-8145-2e0e645997ea",
+                    "sorcId": "b36e70cd-dce6-49b9-b4cf-8e56a24a4668",
                     "serviceGrantList": [
                         {
                             "serviceGrantId": "1",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "2",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "3",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "4",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "5",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "6",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "7",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "8",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "9",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         },
                         {
                             "serviceGrantId": "10",
                             "validators": {
-                                "startTime": "2019-10-22T01:00:00.000Z",
-                                "endTime": "2025-10-22T01:00:00.000Z"
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
+                            }
+                        },
+                        {
+                            "serviceGrantId": "11",
+                            "validators": {
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
+                            }
+                        },
+                        {
+                            "serviceGrantId": "12",
+                            "validators": {
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
+                            }
+                        },
+                        {
+                            "serviceGrantId": "13",
+                            "validators": {
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
+                            }
+                        },
+                        {
+                            "serviceGrantId": "14",
+                            "validators": {
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
+                            }
+                        },
+                        {
+                            "serviceGrantId": "15",
+                            "validators": {
+                                "startTime": "2019-04-25T01:00:00.000Z",
+                                "endTime": "2025-01-01T01:00:00.000Z"
                             }
                         }
                     ],
                     "leaseTokenDocumentVersion": "1",
-                    "leaseTokenId": "89d01b02-30f6-458c-bc90-627e8e79e116",
-                    "sorcAccessKey": "f6ecc866321aae055d4799494d2ffd85",
-                    "startTime": "2019-10-22T01:00:00.000Z",
-                    "endTime": "2025-10-22T01:00:00.000Z"
+                    "leaseTokenId": "544a6c7d-0351-46ab-97b2-84b19e45d857",
+                    "sorcAccessKey": "ee91c3314b95ee10a1df3d0c419d0953",
+                    "startTime": "2019-04-25T01:00:00.000Z",
+                    "endTime": "2025-01-01T01:00:00.000Z"
                 }
             }
         ],
-        "tacsSorcBlobTableVersion": "1576748075346",
+        "tacsSorcBlobTableVersion": "1597993145518",
         "tacsSorcBlobTable": [
             {
                 "tenantId": "default",
-                "externalVehicleRef": "onboardingVehicle_b2bsixt_39536",
+                "externalVehicleRef": "onboardingVehicle_b2bgreenmotion_76998",
                 "blob": {
-                    "sorcId": "84766600-deec-4099-8145-2e0e645997ea",
-                    "blob": "AYR2ZgDe7ECZgUUuDmRZl+oBAAQDAAAoOz7p5XkYRBqsWrgDv6nWHBh1kUqqCFxClvdWIxnEwpkJAkL5E8g0yHHzU6bpJNkyzSocKGIA95Ib0fxJBwGquA5qGLJa2lDP9lTsAb1fOUBPOwblTDbXYPB00eYSMnkEFUy6+n7lhuArrDcvrfoAdXMSrLbbvhlq19ki3WT7x0BOFibZ9fxtJMxosYedsFEqfU4vYNnglW9a0fKAxAa0QTevmkQxlJQKQxz2VH/0O1v2DiCMNUXHxGnB6OXwf5oOqP0GILUWRZC6fkVHpSnlYFiQqnXwxVmQeWduKyt1u/EDAxzeIZW67YK3gO2upE7pWCKnu3s50prnpDBrcUX7ImXS2P58/YBqdnFrUyGMzRdLZwOyrtKCtRTEBES34TNQwAr7e1fkGAUaupt5VOxhOc4askCF6TvqGCxgKBANlO6rJSYbIa29BrHiALUj/XuYqxpUDmYUiAiNBS29QJpqYaE9ob3j+OsfF+6lOXXYHGoQh2Qq9FMURhQ1WJJwZ/dtJ3cIWRJ4fWwj70/Hvb0YlCe09vdv+ZMZK6rusD3qhyLJhjcfDtxByEJbnbr1WfSk6JJet5RE7TZHa5lfD2uoQ/3dZ72PZqaLjVN7zafrvohPE6GLJc7fmsbpaiy12AW4sSSGZD8HaPUvjTAuVVzchk58ji8uqMU8FWx3I6WEfbdgEUW18M2lLw8oCFhR9kgfAq3tpIiT93kdDThdpKPQ5nSL6oVdILTcMIb85cQgRYBWzfgArKGNc0fgepjlA8jH6lWDaDimXdCRbXCrdBCiiwQ33OQ1p4L3ob7+JSRJ/Ow/Ved9Lj9g4VSn25xyg9sGTkkoZVENqGkKsX7dMQPhdOlHtjdMRzJbFAECOufHPWkRKmvNTgaoWXL4z01PFcHkFbGDKm/4J+a3Xiev2dbyNqwm5QAdWLbc1JH05M/2WOpVXoW/k3QkJYFF0Dlc7cNX70lgNKt5LSQ5QiZg0eUTqOi1t8b2RN7Naj+GeNj0J2+WaadLc2W5bKHq/wVLaZMMHFEXfyWocpRriBgp5p1vWnef0ppDusthLxjHszCnITD/vBP6AW+1E9WwpAJqtWP0oCkmFPHU6XIUZhgnT3yWfSQ/QLC5Ju/wKrOXQhuHFEH5SyKAnp2RKBqNvZBF9NUdfJH0I80gLblBDRzDAAbdwN+T8wDNc18+rHSLGrtaC73Jytx20yw/4nBrz3mOtPqTOlRM1FJ5/3/PkMvOFXN6cFVjN7vky4cqMgD60U61obhO2Lnjvb/HR8UNpugGwYUcO9UISpezGMgewGkTE1H/R2vC/1q+6f7Hp1BK1d3QB8YbUqCU16/2H5pavzQQkDgaql7E5+eueqYN//MwrY3yWn7DZaM5pBnyTgeUzgANha5/F+Hco4SQ+VtTSfzhDXm9qoFtUr3DMke1QK+u9jXuafjUZrIaRUT1UF5WlkhrrK/7HkrSMXBAToNipj7hq81fdIifidP8UQomal+0NQCNzO10w+vJfZ6343EBSz18N0FU2tuWdNeXRdgXy9V90qvBZje7IwUKqS0RXljEE3JDEZ26tatxSjGlwZHWtRiBtvyyQrqsWwpTbNrDfwRqOJn7cvLBys+CUIJyuKq4ZMbYQrS2M/qeAl8Z+9BP646FVLm/JKq1LplVrdLa45ECMiwTsoBUw8WfO/YKepBVMEGA",
-                    "blobMessageCounter": "772"
+                    "sorcId": "b36e70cd-dce6-49b9-b4cf-8e56a24a4668",
+                    "blob": "AbNucM3c5km5tM+OVqJKRmgBABgAAACaJwrnFK76/8+Fij6UbLgL66imeseJi8azYJ0CoP1tKCmcMBpIgpR3STPm9RtYBy3W3ed1OSqsuOxBZ9GKhn8+rwRg4fPsK6jjAVVZ43Y80CaOksOCp+W24HjsN6sYmluYXTWCNROXykNxzUSpygE9b+G/4Q6oZry67ATH8s6Skf1qyPpkRUWyoCSKz278rfeUV3npKIbnFBo9cjJbUjNQYuMQ6bo8BLsrycRMBK45eNi3wZSRGU+exNW4nlImak2pJPwzWDE+9HKKvI9fCrZf6HNiwZmQmCkBRXufNhmJGc5Nqz+5axFk/OrupPcJ+YAf9njr99EQUZTXqws0TdaRveXwTTkAKkZv28yQveKznR015YERYnNs+lXs+1E4y0P4lMaqdFp7lyOHfyzQLq1Ne/kkQdoJsnXw9nrmJgz5fqnRKU7Z/Qv4v6eMlVl3+D5rPLvwbAYpI7xGQmjvP8Ewm8L0rrJGpBzGSdK1Nt5ACm0wxKWL054ESEtuuIwKS9RpWDiazmyS1U+0QTSB5ArwObi/swYZL7XBhpYec16j/MFW+Ube5TWPiFm6+91wBmC4pFS8oirDbub+zhIrIIJLZDPLWZXOA7acK9+BM7cvOmBnGLP2JDAQoNbrLZNegjmYxJsUMDiei1YDOLMBdlPETkH3rWKIESwxlTlVO8y74MpCwqq5sXzTAn0dyBphLtzpDWqNN9tXyFqm5J2hxLkaU30WX9u4ThaH4S586Z93JTIuAG8NZx8k1iZobniX6gqCTpZ8fn7iJhcoLyeT7RLixdPYLkmnAt9uCEZ7dAd1cN4n0GLqwBo7O62EvFNf6Lvct+JYfzvEdLDGyC+7N16zRVWhhj+QwllDQmfcrUJCvh9jYICQZxaQhbwt3U47ROJT3EqvoX94wD5poYqunsXXBu7+trCKldsBS8AY8iUAUhIVshTyLBflSqqhauePMir8Teg/K4uOYBjpauaNEjVyXsATgmqnldZHjFvIYeNBMpxnAoMEowSBPIevoquoS227F4qTu2/YoU+R/PtkebIiiccBGzsX+liozyKEFhVT0w8I44w6qnn3g7QJ7vVXD/oymx6cS4HL9bT8L1dtFEQpld6VAobwAGKOM13MFI631g31OpiVx/U3iUC/qxUJ7r4/cmdZKlvuInLe9aY0Fw/RNwTJqYVwLQURIpO3kKPEBcqRD/2yjViD6FgAdQCo8XE6X7ERr4+CD+j/5YufdNR/YI3EbzaIPypbU4b0mmg0CPykVNm6LAwkLi7wB9q7MuT16TrG3jiWP+7q4bVKU2buwQ94NHhbG+wGWz7H57i75+qiDcEbUScSqiKfo8oRi06hol8/t3M/z6drx7yKn6mewzW7fMw5KQrvuEpE9SwW+w==",
+                    "blobMessageCounter": "24"
                 }
             }
         ]

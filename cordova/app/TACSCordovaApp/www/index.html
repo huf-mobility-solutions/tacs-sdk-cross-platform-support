@@ -42,21 +42,26 @@
 
 <body>
     <div class="app">
-        <div id="deviceready" class="blink">
-            <button class="buttons" id="connect">CONNECT</button>
-            <button class="buttons" id="disconnect">DISCONNECT</button>
+        <div class="background"></div>
+        <div id="deviceready" class="wrapper">
+            <div class="one">
+                <button class="buttons" id="connect">CONNECT</button>
+            </div>
+            <div class="two">
+                <button class="buttons" id="disconnect">DISCONNECT</button>
+            </div>
             <button class="buttons" id="lock">LOCK</button>
             <button class="buttons" id="unlock">UNLOCK</button>
-            <button class="buttons" id="immobilizerOn">IMMOBILIZER ON</button>
-            <button class="buttons" id="immobilizerOff">IMMOBILIZER OFF</button>
+            <button class="buttons" id="immobilizerOn">ENGINE OFF</button>
+            <button class="buttons" id="immobilizerOff">ENGINE ON</button>
             <button class="buttons" id="telematics">TELEMATICS</button>
             <button class="buttons" id="location">LOCATION</button>
-            <p id="connectionStatus">Connection Status</p>
-            <p id="doorStatus">Door Status</p>
-            <p id="engineStatus">Engine Status</p>
-            <p id="telematicsStatus">Telematics</p>
-            <p id="locationStatus">Location</p>
         </div>
+        <p id="connectionStatus">Connection Status</p>
+        <p id="doorStatus">Door Status</p>
+        <p id="engineStatus">Engine Status</p>
+        <p id="telematicsStatus">Telematics Status</p>
+        <p id="locationStatus">Location Status</p>
     </div>
     <script type="text/javascript" src="../plugins/com.playmoove.huf/www/Huf.js"></script>
     <script src="cordova.js"></script>

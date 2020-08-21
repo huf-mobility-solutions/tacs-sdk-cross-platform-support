@@ -147,8 +147,7 @@ import SecureAccessBLE
         // Reflect on ble device change by providing necessary feedback to the user.
         // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
         DispatchQueue.main.async { [weak self] in
-            print("Bluetooth state is")
-            print(bluetoothState)
+            //self.sendEventBackToJs(message: bluetoothState.)
         }
     }
     
@@ -191,9 +190,13 @@ import SecureAccessBLE
                     switch feature {
                     case .lock, .unlock, .lockStatus:
                         doorStatus = "Not accepted, queue is full"
+                        print("Queue is full doorstatus")
+                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
                         engineStatus = "Not accepted, queue is full"
+                        print("Queue is full enginestatus")
+                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     }
                 }
@@ -202,18 +205,26 @@ import SecureAccessBLE
                 case let .success(status: status):
                     if case let .ignitionStatus(enabled: enabled) = status {
                         engineStatus = enabled ? "Ignition enabled" : "Ignition disabled"
+                        print("Got enginestatus")
+                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     } else if case let .lockStatus(locked: locked) = status {
                         doorStatus = locked ? "Doors locked" : "Doors unlocked"
+                        print("Got doorstatus")
+                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     }
                 case let .failure(feature: feature, error: error):
                     switch feature {
                     case .lock, .unlock, .lockStatus:
                         doorStatus = "Error: \(String(describing: error))"
+                        print("Error doorstatus")
+                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
                         engineStatus = "Error: \(String(describing: error))"
+                        print("Error engineStatus")
+                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     }
                 }
@@ -225,8 +236,10 @@ import SecureAccessBLE
             if case let .responseReceived(response) = locationDatachange.action {
                 switch response {
                 case .success(let data):
+                    self.updateLocationData(data)
                     break
                 case .error(let error):
+                    self.updateLocationError(error)
                     break
                 }
             }
@@ -239,13 +252,47 @@ import SecureAccessBLE
                 for response in responses {
                     switch response {
                     case .success(let data):
+                        self.updateTelematicsData(data)
                         break
                     case let .error(type, error):
+                        self.updateTelematicsError(error, type: type)
                         break
                     }
                 }
             }
         }
+    }
+    
+    private func updateLocationData(_ data: LocationData) {
+        let latitude = String(format: "%f", data.latitude)
+        let longitude = String(format: "%f", data.longitude)
+        let accuracy = String(format: "%f", data.accuracy)
+        let locationValue: String = latitude + ";" + longitude + ";" + accuracy
+        self.sendEventBackToJs(message: locationValue)
+    }
+    
+    private func updateLocationError(_ error: TelematicsDataError) {
+        self.sendEventBackToJs(message: error.rawValue)
+    }
+    
+    private func updateTelematicsData(_ data: TelematicsData) {
+        var fuelAbsValue: String = "Not available"
+        var fuelRelValue: String = "Not available"
+        var odometerValue: String = "Not available"
+        switch data.type {
+        case .fuelLevelAbsolute:
+            fuelAbsValue = "\(data.value) \(data.unit)"
+        case .fuelLevelPercentage:
+            fuelRelValue = "\(data.value) \(data.unit)"
+        case .odometer:
+            odometerValue = "\(data.value) \(data.unit)"
+        }
+        let telematicsData: String = fuelAbsValue + ";" + fuelRelValue + ";" + odometerValue
+        self.sendEventBackToJs(message: telematicsData)
+    }
+    
+    private func updateTelematicsError(_ error: TelematicsDataError, type: TelematicsDataType) {
+        self.sendEventBackToJs(message: error.rawValue)
     }
     
     private func sendEventBackToJs(message: String) {
