@@ -24,119 +24,161 @@ document.getElementById("lock").addEventListener("click", lockButtonClick);
 document.getElementById("unlock").addEventListener("click", unlockButtonClick);
 document.getElementById("connect").addEventListener("click", connectButtonClick);
 document.getElementById("disconnect").addEventListener("click", disconnectButtonClick);
-document.getElementById("immobilizerOn").addEventListener("click", immobilizerOnButtonClick);
-document.getElementById("immobilizerOff").addEventListener("click", immobilizerOffButtonClick);
+document.getElementById("engineOff").addEventListener("click", engineOffButtonClick);
+document.getElementById("engineOn").addEventListener("click", engineOnButtonClick);
 document.getElementById("location").addEventListener("click", locationButtonClick);
 document.getElementById("telematics").addEventListener("click", telematicsButtonClick);
 
+/**
+ * This is called when the Cordova is initialized. 
+ * Once the cordova is initialized, we initialize the plugin that internally
+ * initializes the TACS manager and builds the keyring and makes everything ready to connect
+ */
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
     // Get the keyring json
-    const data = getKeyringJson()
+    const keyringData = getKeyringJson()
 
     // Build the keyring once the device is ready
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("connectionStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("connectionStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("connectionStatus").textContent = "Error"
     }
-    hufPlugin.buildKeyring(success, fail, JSON.stringify(data))
+    hufPlugin.initPlugin(success, error, JSON.stringify(keyringData))
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 }
 
+/**
+ * On lock button click, we request the plugin to execute the lock command
+ * and on receiving the plugin result as 'success' we update the UI with the lock status
+ */
 function lockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("doorStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("doorStatus").textContent = "Error"
     }
-    hufPlugin.executeLockCommand(success, fail)
+    hufPlugin.executeLockCommand(success, error)
 }
 
+/**
+ * On unlock button click, we request the plugin to execute the unlock command
+ * and on receiving the plugin result as 'success' we update the UI with the unlock status
+ */
 function unlockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("doorStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("doorStatus").textContent = "Error"
     }
-    hufPlugin.executeUnlockCommand(success, fail)
+    hufPlugin.executeUnlockCommand(success, error)
 }
 
+/**
+ * On connect button click, we request the plugin to execute the connect command
+ * and on receiving the plugin result as 'success' we update the UI with the connecting 
+ * or connected status.
+ */
 function connectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("connectionStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("connectionStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("connectionStatus").textContent = "Error"
     }
-    hufPlugin.connectToCAM(success, fail)
+    hufPlugin.connectToCAM(success, error)
 }
 
+/**
+ * On disconnect button click, we request the plugin to execute the disconnect command
+ * and on receiving the plugin result as 'success' we update the UI with the disconnected 
+ * status.
+ */
 function disconnectButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("connectionStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("connectionStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("connectionStatus").textContent = "Error"
     }
-    hufPlugin.disconnectFromCAM(success, fail)
+    hufPlugin.disconnectFromCAM(success, error)
 }
 
-function immobilizerOnButtonClick() {
+/**
+ * On engine off button click, we request the plugin to execute the engine off command
+ * and on receiving the plugin result as 'success' we update the UI with the engine off status
+ */
+function engineOffButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("engineStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("engineStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("engineStatus").textContent = "Error"
     }
-    hufPlugin.executeImmobilizerOnCommand(success, fail)
+    hufPlugin.executeEngineOffCommand(success, error)
 }
 
-function immobilizerOffButtonClick() {
+/**
+ * On engine on button click, we request the plugin to execute the engine on command
+ * and on receiving the plugin result as 'success' we update the UI with the engine on status
+ */
+function engineOnButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("engineStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("engineStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("engineStatus").textContent = "Error"
     }
-    hufPlugin.executeImmobilizerOffCommand(success, fail)
+    hufPlugin.executeEngineOnCommand(success, error)
 }
 
+/**
+ * On location button click, we request the plugin to execute the location command
+ * and on receiving the plugin result as 'success' we update the UI with the location data
+ */
 function locationButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("locationStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("locationStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("locationStatus").textContent = "Error"
     }
-    hufPlugin.executeLocationCommand(success, fail)
+    hufPlugin.executeLocationCommand(success, error)
 }
 
+/**
+ * On telematics button click, we request the plugin to execute the telematics command
+ * and on receiving the plugin result as 'success' we update the UI with the telematics data
+ */
 function telematicsButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
         document.getElementById("telematicsStatus").textContent = success.arguments[0]
     }
-    var fail = function () {
-        document.getElementById("telematicsStatus").textContent = "Failure"
+    var error = function () {
+        document.getElementById("telematicsStatus").textContent = "Error"
     }
-    hufPlugin.executeTelematicsCommand(success, fail)
+    hufPlugin.executeTelematicsCommand(success, error)
 }
 
+/**
+ * Local function to get the keyring
+ */
 function getKeyringJson() {
     return {
         "tacsLeaseTokenTableVersion": "1597993145518",

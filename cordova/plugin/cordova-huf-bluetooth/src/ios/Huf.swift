@@ -7,16 +7,24 @@ import SecureAccessBLE
     private var disposeBag: DisposeBag!
     private var callbackId: String!
     
+    /**
+     Register a callback id. This callback id is later used to send the events back to the javascript
+      mapped to the corresponding request made.
+     */
     @objc(registerCallbackId:)
     func registerCallbackId(command: CDVInvokedUrlCommand) {
         print("Registering callback id")
         callbackId = command.callbackId
     }
     
-    @objc(buildKeyring:)
-    func buildKeyring(command: CDVInvokedUrlCommand) {
+    /**
+    Initialize the plugin by building the TACS Manager with necessary keyring provided by the app.
+     Also register all subscriptions need to be present to observe any change in event from the TACS library.
+    */
+    @objc(initPlugin:)
+    func initPlugin(command: CDVInvokedUrlCommand) {
         
-        print("Building Keyring")
+        print("Initializing the plugin")
         
         let vehicleAccessGrantId: String = "MySampleAccessGrantId"
         let queue = DispatchQueue(label: "com.hufsm.blehandling")
@@ -39,6 +47,10 @@ import SecureAccessBLE
         }
     }
     
+    /**
+     On connect BLE requested, the TACS library starts scanning for the device with the SORC ID
+       that was present in the keyring.
+     */
     @objc(connectBle:)
     func connectBle(command: CDVInvokedUrlCommand) {
         print("TACS Connect BLE requetsed")
@@ -50,6 +62,9 @@ import SecureAccessBLE
         tacsManager.startScanningWithTimeout()
     }
     
+    /**
+     On disconnect BLE requested, the TACS library disconnects any active BLE connection
+    */
     @objc(disconnectBle:)
     func disconnectBle(command: CDVInvokedUrlCommand) {
         print("TACS Disconnect BLE requested")
@@ -59,6 +74,9 @@ import SecureAccessBLE
         tacsManager.disconnect()
     }
 
+    /**
+     On location requested, the TACS library is requested for the location data of the sorc
+    */
     @objc(executeLocation:)
     func executeLocation(command: CDVInvokedUrlCommand) {
         print("TACS execute Location")
@@ -66,6 +84,9 @@ import SecureAccessBLE
         tacsManager.telematicsManager.requestLocationData()
     }
 
+    /**
+     On telematics requested, the TACS library is requested for the telematics data of the sorc
+    */
     @objc(executeTelematics:)
     func executeTelematics(command: CDVInvokedUrlCommand) {
         print("TACS execute Telematics")
@@ -73,6 +94,9 @@ import SecureAccessBLE
         tacsManager.telematicsManager.requestTelematicsData([.odometer, .fuelLevelAbsolute, .fuelLevelPercentage])
     }
     
+    /**
+     On lock requested, the TACS library is requested for the door lock
+    */
     @objc(executeLock:)
     func executeLock(command: CDVInvokedUrlCommand) {
         print("TACS Executing lock")
@@ -81,22 +105,31 @@ import SecureAccessBLE
         tacsManager.vehicleAccessManager.requestFeature(.lockStatus)
     }
 
-    @objc(executeImmobilizerOn:)
-    func executeImmobilizerOn(command: CDVInvokedUrlCommand) {
-        print("TACS Executing executeImmobilizerOn")
+    /**
+     On engine off requested, the TACS library is requested for the engine off
+    */
+    @objc(executeEngineOff:)
+    func executeEngineOff(command: CDVInvokedUrlCommand) {
+        print("TACS Executing execute Engine Off")
         
         tacsManager.vehicleAccessManager.requestFeature(.disableIgnition)
         tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
     }
 
-    @objc(executeImmobilizerOff:)
-    func executeImmobilizerOff(command: CDVInvokedUrlCommand) {
-        print("TACS Executing executeImmobilizerOff")
+    /**
+     On engine off requested, the TACS library is requested for the engine off
+    */
+    @objc(executeEngineOn:)
+    func executeEngineOn(command: CDVInvokedUrlCommand) {
+        print("TACS Executing execute Engine On")
         
         tacsManager.vehicleAccessManager.requestFeature(.enableIgnition)
         tacsManager.vehicleAccessManager.requestFeature(.ignitionStatus)
     }
     
+    /**
+     On unlock requested, the TACS library is requested for the door unlock
+    */
     @objc(executeUnlock:)
     func executeUnlock(command: CDVInvokedUrlCommand) {
         print("TACS Executing unlock")
@@ -105,6 +138,15 @@ import SecureAccessBLE
         tacsManager.vehicleAccessManager.requestFeature(.lockStatus)
     }
     
+    /**
+     Register all subscriptions such as for observing the -
+     1. bluetooth state of the device
+     2. Any SORC discovery change
+     3.Any SORC connection change
+     4. Any vehicle access change that includes door and engine status
+     5. Any telematics data change that includes fuel and odometer values
+     6. Any location data change that includes latitutde, longitude and accuracy values
+    */
     private func registerSubscriptions() {
         
         // Subscribe to bluetooth state signal
@@ -140,6 +182,9 @@ import SecureAccessBLE
         }.disposed(by: disposeBag)
     }
     
+    /**
+     On bluetooth state change, the event is sent back to the Huf.js
+     */
     private func onBluetoothStateChange(_ bluetoothState: BluetoothState) {
         // Reflect on ble device change by providing necessary feedback to the user.
         // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
@@ -148,6 +193,9 @@ import SecureAccessBLE
         }
     }
     
+    /**
+     On discovery state change, the event is sent back to the Huf.js
+    */
     private func onDiscoveryChange(_ discoveryChange: TACS.DiscoveryChange) {
         var discoveryStatus: String = ""
         switch discoveryChange.action {
@@ -165,6 +213,9 @@ import SecureAccessBLE
         self.sendEventBackToJs(message: discoveryStatus)
     }
     
+    /**
+     On connection state change, the event is sent back to the Huf.js
+    */
     private func onConnectionChange(_ connectionChange: TACS.ConnectionChange) {
         let status: String
         
@@ -177,6 +228,9 @@ import SecureAccessBLE
         self.sendEventBackToJs(message: status)
     }
     
+    /**
+     On vehicle state change that includes door or engine status, the event is sent back to the Huf.js
+    */
     private func onVehicleAccessFeatureChange(_ vehicleAccessFeatureChange: VehicleAccessFeatureChange) {
       var doorStatus: String = ""
         var engineStatus: String = ""
@@ -187,13 +241,9 @@ import SecureAccessBLE
                     switch feature {
                     case .lock, .unlock, .lockStatus:
                         doorStatus = "Not accepted, queue is full"
-                        print("Queue is full doorstatus")
-                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
                         engineStatus = "Not accepted, queue is full"
-                        print("Queue is full enginestatus")
-                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     }
                 }
@@ -202,32 +252,27 @@ import SecureAccessBLE
                 case let .success(status: status):
                     if case let .ignitionStatus(enabled: enabled) = status {
                         engineStatus = enabled ? "Ignition enabled" : "Ignition disabled"
-                        print("Got enginestatus")
-                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     } else if case let .lockStatus(locked: locked) = status {
                         doorStatus = locked ? "Doors locked" : "Doors unlocked"
-                        print("Got doorstatus")
-                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     }
                 case let .failure(feature: feature, error: error):
                     switch feature {
                     case .lock, .unlock, .lockStatus:
                         doorStatus = "Error: \(String(describing: error))"
-                        print("Error doorstatus")
-                        print(doorStatus)
                         self.sendEventBackToJs(message: doorStatus)
                     case .enableIgnition, .disableIgnition, .ignitionStatus:
                         engineStatus = "Error: \(String(describing: error))"
-                        print("Error engineStatus")
-                        print(engineStatus)
                         self.sendEventBackToJs(message: engineStatus)
                     }
                 }
             }
     }
     
+    /**
+     On location state change, the event is sent back to the Huf.js
+    */
     private func onLocationDataChange(_ locationDatachange: LocationDataChange) {
         DispatchQueue.main.async {
             if case let .responseReceived(response) = locationDatachange.action {
@@ -243,6 +288,9 @@ import SecureAccessBLE
         }
     }
     
+    /**
+     On telematics state change, the event is sent back to the Huf.js
+    */
     private func onTelematicsDataChange(_ telematicsDataChange: TelematicsDataChange) {
         DispatchQueue.main.async {
             if case let .responseReceived(responses) = telematicsDataChange.action {
@@ -291,7 +339,9 @@ import SecureAccessBLE
     private func updateTelematicsError(_ error: TelematicsDataError, type: TelematicsDataType) {
         self.sendEventBackToJs(message: error.rawValue)
     }
-    
+    /**
+     Send the events received from the TACS library back to the Huf.js that will forward it to the app
+     */
     private func sendEventBackToJs(message: String) {
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: message);
