@@ -144,7 +144,7 @@ import SecureAccessBLE
         // Reflect on ble device change by providing necessary feedback to the user.
         // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
         DispatchQueue.main.async { [weak self] in
-           // self.sendEventBackToJs(message: blueto)
+            self?.sendEventBackToJs(message: String(describing: bluetoothState))
         }
     }
     
