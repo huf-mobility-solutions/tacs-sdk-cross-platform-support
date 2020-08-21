@@ -32,14 +32,11 @@ import SecureAccessBLE
         let useAccessGrantResult = tacsManager.useAccessGrant(with: vehicleAccessGrantId, from: keyRing)
         assert(useAccessGrantResult)
         
-        // Set the plugin result to fail.
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-        
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-        
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        if (useAccessGrantResult) {
+            self.sendEventBackToJs(message: "Ready to connect")
+        } else {
+            self.sendEventBackToJs(message: "Keyring error")
+        }
     }
     
     @objc(connectBle:)
@@ -147,7 +144,7 @@ import SecureAccessBLE
         // Reflect on ble device change by providing necessary feedback to the user.
         // Running discoveries for vehicle or keyholder will automatically stop and notified via signals.
         DispatchQueue.main.async { [weak self] in
-            //self.sendEventBackToJs(message: bluetoothState.)
+           // self.sendEventBackToJs(message: blueto)
         }
     }
     

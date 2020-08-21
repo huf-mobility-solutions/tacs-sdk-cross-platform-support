@@ -31,11 +31,19 @@ document.getElementById("telematics").addEventListener("click", telematicsButton
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
 
-    //Get the json
+    // Get the keyring json
     const data = getKeyringJson()
-    hufPlugin.buildKeyring(JSON.stringify(data))
+
+    // Build the keyring once the device is ready
+    const hufPlugin = cordova.require("com.playmoove.huf.Huf");
+    var success = function () {
+        document.getElementById("connectionStatus").textContent = success.arguments[0]
+    }
+    var fail = function () {
+        document.getElementById("connectionStatus").textContent = "Failure"
+    }
+    hufPlugin.buildKeyring(success, fail, JSON.stringify(data))
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
@@ -44,7 +52,6 @@ function onDeviceReady() {
 function lockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
-        console.log("Success lock")
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
     var fail = function () {
@@ -56,7 +63,6 @@ function lockButtonClick() {
 function unlockButtonClick() {
     const hufPlugin = cordova.require("com.playmoove.huf.Huf");
     var success = function () {
-        console.log("Success unlock")
         document.getElementById("doorStatus").textContent = success.arguments[0]
     }
     var fail = function () {

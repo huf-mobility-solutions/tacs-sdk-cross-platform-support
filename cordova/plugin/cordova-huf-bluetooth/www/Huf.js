@@ -37,9 +37,8 @@ module.exports = {
     cordova.exec(success, fail, packageName, 'registerCallbackId', [])
     cordova.exec(success, fail, packageName, 'disconnectBle', [])
   },
-  buildKeyring: (keyringData) => {
-    return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, packageName, 'buildKeyring', [keyringData])
-    })
+  buildKeyring: (success, fail, keyringData) => {
+    cordova.exec(success, fail, packageName, 'registerCallbackId', [])
+    cordova.exec(success, fail, packageName, 'buildKeyring', [keyringData])
   }
 }
