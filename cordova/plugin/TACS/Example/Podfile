@@ -1,0 +1,20 @@
+source 'git@github.com:hufsm/mobile-ios-podspecs.git'
+source 'https://cdn.cocoapods.org/'
+
+platform :ios, '10.3'
+use_frameworks!
+target 'TACS_Tests' do
+  pod 'TACS', :path => '../'
+  
+  pod 'Nimble', '8.0.1'
+  pod 'Quick', '2.0.0'
+  pod 'SecureAccessBLE', '3.13.0'
+
+  pod 'SwiftFormat/CLI'
+  pod 'SwiftLint', '0.28.0'
+end
+
+target 'TACS' do
+  pod 'SecureAccessBLE', '3.13.0'
+
+end

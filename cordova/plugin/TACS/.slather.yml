@@ -1,0 +1,9 @@
+coverage_service: cobertura_xml
+xcodeproj: Example/TACS.xcodeproj
+workspace: Example/TACS.xcworkspace
+scheme: TACS-Example
+output_directory: ./test-reports
+source_directory: TACS/Classes
+binary_basename: TACS
+ignore:
+  - Example/Tests/*

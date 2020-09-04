@@ -1,0 +1,6 @@
+framework module TACS {
+  umbrella header "TACS-umbrella.h"
+
+  export *
+  module * { export * }
+}
