@@ -25,7 +25,6 @@ public class TacsflutterPlugin implements FlutterPlugin, MethodCallHandler {
         channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "tacsflutter");
         channel.setMethodCallHandler(this);
         this.tacsManager = new TacsManager();
-
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -44,6 +43,37 @@ public class TacsflutterPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+        switch (call.method) {
+            case "buildKeyring":
+                tacsManager.buildKeyring();
+                break;
+            case "connect":
+                tacsManager.connect();
+                break;
+            case "disconnect":
+                tacsManager.disconnect();
+                break;
+            case "lock":
+                tacsManager.lockDoors();
+                break;
+            case "unlock":
+                tacsManager.unlockDoors();
+                break;
+            case "enableEngine":
+                tacsManager.enableEngine();
+                break;
+            case "disableEngine":
+                tacsManager.disableEngine();
+                break;
+            case "location":
+                tacsManager.getLocation();
+                break;
+            case "telematics":
+                tacsManager.getTelematics();
+                break;
+            default:
+                break;
+        }
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals("buildKeyring")) {

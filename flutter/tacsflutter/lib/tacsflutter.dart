@@ -6,11 +6,6 @@ import 'package:flutter/services.dart';
 class Tacsflutter {
   static const MethodChannel _channel = const MethodChannel('tacsflutter');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-
   static Future<bool> buildKeyring(JsonDecoder json) async {
     final bool keyringBuilt = await _channel.invokeMethod('buildKeyring', json);
     return keyringBuilt;
