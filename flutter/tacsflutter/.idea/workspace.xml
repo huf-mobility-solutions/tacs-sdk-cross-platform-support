@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c15b24cd-478d-4b63-bf14-561a7676f9bc" name="Default Changelist" comment="" />
+    <list default="true" id="85977924-0ad5-4dc0-9ae3-ebf9ae054b36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/assets/keyring.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/assets/keyring.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tacsflutter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tacsflutter.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +37,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1h0UjEh6h1YHPaeR7oBDkwNCV6F" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1h2c86vT7zxAhNqQkCjxZrs2U3e" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -31,23 +57,35 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c15b24cd-478d-4b63-bf14-561a7676f9bc" name="Default Changelist" comment="" />
-      <created>1599147636046</created>
+      <changelist id="85977924-0ad5-4dc0-9ae3-ebf9ae054b36" name="Default Changelist" comment="" />
+      <created>1599212464343</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1599147636046</updated>
+      <updated>1599212464343</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="542" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1599147694135">
+    <state x="552" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1599212496938">
+      <screen x="0" y="23" width="1440" height="822" />
+    </state>
+    <state x="552" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.822@0.23.1440.822" timestamp="1599212496938" />
+    <state width="1398" height="170" key="GridCell.Tab.0.bottom" timestamp="1599218418325">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state x="542" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.823@0.23.1440.823" timestamp="1599147694135" />
-    <state x="359" y="266" key="com.intellij.ide.util.TipDialog" timestamp="1599147667727">
+    <state width="1398" height="170" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1599218418325" />
+    <state width="1398" height="170" key="GridCell.Tab.0.center" timestamp="1599218418324">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state x="359" y="266" key="com.intellij.ide.util.TipDialog/0.23.1440.823@0.23.1440.823" timestamp="1599147667727" />
+    <state width="1398" height="170" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1599218418324" />
+    <state width="1398" height="170" key="GridCell.Tab.0.left" timestamp="1599218418323">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="1398" height="170" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1599218418323" />
+    <state width="1398" height="170" key="GridCell.Tab.0.right" timestamp="1599218418324">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="1398" height="170" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1599218418324" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

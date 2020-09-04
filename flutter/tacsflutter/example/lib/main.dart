@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    _readKeyringJsonFromAssets();
   }
 
   /// When user pressed lock doors button
@@ -32,12 +33,32 @@ class _MyAppState extends State<MyApp> {
   /// When user pressed unlock doors button
   unlockDoors() {}
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  /// When user pressed connect button
+  connect() {}
+
+  /// When user pressed disconnect button
+  disconnect() {}
+
+  /// When user pressed enable engine button
+  enableEngine() {}
+
+  /// When user pressed disable engine button
+  disableEngine() {}
+
+  /// When user pressed location button
+  location() {}
+
+  /// When user pressed telematics button
+  telematics() {}
+
+  Future<void> _readKeyringJsonFromAssets() async {
+    String data = await rootBundle.loadString('assets/keyring.json');
+    print(json.decode(data));
+
     bool keyringBuilt;
 
     try {
-      keyringBuilt = await Tacsflutter.buildKeyring();
+      keyringBuilt = await Tacsflutter.buildKeyring(json.decode(data));
     } on PlatformException {
       keyringBuilt = false;
     }
@@ -116,6 +137,25 @@ class _MyAppState extends State<MyApp> {
                       padding: const EdgeInsets.all(8.0),
                       textColor: Colors.black,
                       color: Colors.white,
+                      onPressed: connect,
+                      child: new Text("Connect"),
+                    ),
+                    new RaisedButton(
+                      padding: const EdgeInsets.all(8.0),
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      onPressed: disconnect,
+                      child: new Text("Disconnect"),
+                    ),
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new RaisedButton(
+                      padding: const EdgeInsets.all(8.0),
+                      textColor: Colors.black,
+                      color: Colors.white,
                       onPressed: lockDoors,
                       child: new Text("Lock Doors"),
                     ),
@@ -124,9 +164,45 @@ class _MyAppState extends State<MyApp> {
                       textColor: Colors.black,
                       color: Colors.white,
                       padding: const EdgeInsets.all(8.0),
-                      child: new Text(
-                        "Unlock Doors",
-                      ),
+                      child: new Text("Unlock Doors"),
+                    ),
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new RaisedButton(
+                      padding: const EdgeInsets.all(8.0),
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      onPressed: enableEngine,
+                      child: new Text("Enable Engine"),
+                    ),
+                    new RaisedButton(
+                      onPressed: disableEngine,
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(8.0),
+                      child: new Text("Disable Engine"),
+                    ),
+                  ],
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new RaisedButton(
+                      padding: const EdgeInsets.all(8.0),
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      onPressed: location,
+                      child: new Text("Location"),
+                    ),
+                    new RaisedButton(
+                      onPressed: telematics,
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(8.0),
+                      child: new Text("Telematics"),
                     ),
                   ],
                 )
