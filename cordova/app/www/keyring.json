@@ -1,0 +1,39 @@
+{
+    "tacsLeaseTokenTable": [
+        {
+            "vehicleAccessGrantId": "10E58CD4-09D1-451B-9387-ADEC05354A70",
+            "leaseToken": {
+                "leaseTokenDocumentVersion": "0",
+                "leaseId": "00000000-0000-0000-0000-000000000000",
+                "sorcAccessKey": "f505c9ebbb32a51d7753448f17de9a60",
+                "userId": "0",
+                "leaseTokenId": "10E58CD4-09D1-451B-9387-ADEC05354A70",
+                "sorcId": "9B1CEE15-B483-4AE4-B31A-5E72E3EB7A91",
+                "endTime": "",
+                "serviceGrantList": [
+                    {
+                        "validators": {
+                            "endTime": "",
+                            "startTime": ""
+                        },
+                        "serviceGrantId": "0"
+                    }
+                ],
+                "startTime": ""
+            }
+        }
+    ],
+    "tacsSorcBlobTableVersion": "0",
+    "tacsLeaseTokenTableVersion": "0",
+    "tacsSorcBlobTable": [
+        {
+            "externalVehicleRef": "",
+            "tenantId": "",
+            "blob": {
+                "blob": "AZsc7hW0g0rksxpecuPrepEBADkCAACSlRxm7GPZ8DyGblBjKPD50W801gfc+m3sypnk+CP1v3wMQqgAf6U1L8eY85EHJkecevZ4j/hC1uzOyPWEy3HKlaUzogz/fzpFv5unu2yCYG8medZ8jB5z+pG/7iSWyyhvRTYzpG2x5QRT4v9j8BiLCBpOj/RCiTI+m/rXqaOir2McnX8UQlPpGugSfxtah96liStKRsodDOJGzRUhOCnmNROnH92DcT4YqWCjKUHVwESV6DYHBuWwwNNaudH1xoWsS0/kEKjtT/fhBSa6mqq+GEgv/x42F3w9N+QJqD0ETyoK+1jqEokbHOJ4v/i0dtUOruynmAvktSU8jxovot/5KTPwoJ457hsLxS1aWktHHGYFE74KR6c8Ns8M8l9EEuUVM7WFW12ZKvQ/imSeu3PD3gwWzlOHJ7EgPEVkYnjIReFKrCIz2ObRToVAiUaWBlG3wg7EYL6l1b4ovkleyQ/8JoG3Y6dBJPGDeLJfzPD1++mcFYNzwxsQ1LVnKlX8R1rqFZ5+lYCyjy3bxqUnuGwbEN69/MTuQbfTofRCIIGk5NEXmsPfcYOBWCBFIFCaQlB2ufBVJSRZ3MJ0qoFoBl6e42+0s9AxRQNkPhe8Qo0M95GCXIO03W5Dp4GzXdszZvMNInzuNlXY5EAuKWc5e7CFpl1MwdxDhaAiA+hwCzXABgAYm4Iamy+/KSj/WshozMSNuQMR5ov98vkTh02zQhmZWgCgETIo84Uu3e0cwu9R/WF1sXdhWTRjkdOvHo7vksryZQshzw4LFH6h5a7rkwdHs5U/W5XlzDkFX5R13xLPFQdwUwAUHcUDyxlotscvTQl2Af4J7iXnYEXvpAR3z4Q1xBQZRuo4DcNsJrNfD5P0gIDYJdWMisRaXC9QNQ4hQd1tuXgxTRLN2M1EQNxQbGW/FBrjVSbytYYQXciWHBLBi5TWm53XCmkTH5nKwzin8iCanBQh6RcTT7I1XJw6zSa+UCejDxxDxzZT5Em1bjmMqBP178DijOS9JvDhsnkMxF+T4BA9KL7humF10h+rZ/oGXJqw+XZG1MWuWNhQQ9xFeUJHVV9m0SrsWBhdHfo5En+6Cn4Supaq9pDG1Rq74Zd2A3Gk1gx8J/FpR+ivlW9OhELL2EjmbuDWz7ypB5zkeiYqY6byVi+Bt0gsfnrsO8zO2C+GKLapWwM+4kF+cKGq9BcMMZzgLDVojcd8q44k4g0XkX8PznP1ZkUZSLAFr2lvnL4Mb/D7m3xrkl/iTd4gK3OMhi/16eyZvEzZS+iXZ+OCv+ME7E50MqVL4BPW6xw8gja43321/zIhoh7A2O15d1y4uDJ1OamJYJeTAgkoEFXqH+Udi07pOpyCkYS8A5aAM2MNsro4YQM8eAZtIZbcKgBvzxEuArJnfvYp2NuZZ+i5GYdxlgEWtUYSuKLbQkeF",
+                "sorcId": "9B1CEE15-B483-4AE4-B31A-5E72E3EB7A91",
+                "blobMessageCounter": "569"
+            }
+        }
+    ]
+}

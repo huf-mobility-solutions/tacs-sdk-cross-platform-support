@@ -79,8 +79,7 @@ public class Huf extends CordovaPlugin {
     private String[] checkAllPermissions(Context context) {
         ArrayList<String> requiredPermissions = new ArrayList<>();
         checkPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.GET_PERMISSIONS, requiredPermissions, context);
-        checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED, requiredPermissions, context);
-        checkPermission(android.Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED, requiredPermissions, context);
+        checkPermission(android.Manifest.permission.BLUETOOTH_ADMIN, PackageManager.GET_PERMISSIONS, requiredPermissions, context);
 
         String[] requiredPermissionArray = new String[requiredPermissions.size()];
         requiredPermissions.toArray(requiredPermissionArray);

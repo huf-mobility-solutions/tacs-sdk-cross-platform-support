@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-tacs",
+  "version": "1.0.0",
+  "description": "Cordova Wrapper for SixSense TACS SDK",
+  "cordova": {
+    "id": "cordova-plugin-tacs",
+    "platforms": [
+      "browser",
+      "android",
+      "ios"
+    ]
+  },
+  "types": "types.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-browser",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "HUF",
+  "license": "PRIVATE",
+  "devDependencies": {
+    "@types/cordova": "0.0.34",
+    "typescript": "^4.0.2"
+  }
+}

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-tacs-plugin" version="1.0.0" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>TACS</name>
+    <js-module name="TACS" src="www/TACS.js">
+        <clobbers target="TACS"/>
+    </js-module>
+
+    <platform name="browser">
+        <js-module src="src/browser/HufProxy.js" name="HufProxy">
+            <runs />
+        </js-module>
+    </platform>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TACS">
+                <param name="android-package" value="com.hufsm.tacs.TACSPlugin"/>
+            </feature>
+        </config-file>
+        <framework src="src/android/tacs.gradle" custom="true" type="gradleReference" />
+        <source-file src="src/android/TACSPlugin.java" target-dir="src/com/hufsm/tacs/"/>
+        <resource-file src="ble.aar" target="../libs/android/ble-2.15.1.aar" />
+        <resource-file src="tacs.aar" target="../libs/android/tacs-1.4.1.aar" />
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+        </config-file>
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="TACSPlugin">
+                <param name="ios-package" value="TACSPlugin" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/TACSPlugin.swift" target-dir="src/com/hufsm"/>
+        <podspec>
+          <config>
+            <source url="https://cdn.cocoapods.org/"/>
+          </config>
+          <pods use-frameworks="true">
+            <pod name="TACS" options=":path => '../../../plugin/TACS/TACS.podspec'" />
+            <pod name="SecureAccessBLE" options=":path => '../../../plugin/SecureAccessBLE/SecureAccessBLE.podspec'" />
+          </pods>
+        </podspec>
+    </platform>
+</plugin>

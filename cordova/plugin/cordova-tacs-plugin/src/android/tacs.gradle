@@ -8,6 +8,9 @@ allprojects {
         google()
         jcenter()
         // Configure repositories
+        flatDir {
+            dirs 'libs/'
+        }
     }
 }
 
@@ -31,5 +34,7 @@ buildscript {
 
 dependencies {
     // Add dependencies
+    compile (name:'ble', ext:'aar')
+    compile (name:'tacs', ext:'aar')
 }
 
