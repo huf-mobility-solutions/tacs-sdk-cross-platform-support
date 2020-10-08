@@ -3,7 +3,7 @@ const packageName = "TACSPlugin";
 const createTACS = () => {
     const setupEventChannel = () => new Promise((resolve, reject) => {
         const handleEvent = (event) => {
-            const customEvent = new CustomEvent(event.type, event.detail);
+            const customEvent = new CustomEvent(event.type, { detail: event.detail });
             document.dispatchEvent(customEvent);
         };
         const handleInitialized = () => {

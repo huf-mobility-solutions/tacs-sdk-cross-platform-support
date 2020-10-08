@@ -9,7 +9,7 @@ const createTACS = () => {
 
     const handleEvent = (event: PluginEvent) => {
     
-      const customEvent = new CustomEvent(event.type, event.detail)
+      const customEvent = new CustomEvent(event.type, { detail: event.detail })
   
       document.dispatchEvent(customEvent)
     }

@@ -10,12 +10,24 @@
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="css/index.css">
-    <title>TACS Demo</title>
+    <title>TACS Cordova Demo</title>
 </head>
 
 <body>
     <div class="app">
-        <div class="background"></div>
+        <div class="status">
+            <div><p><b>Connection: </b><span id="connectionStatus">disconnected</span></p></div>
+            <div><p><b>Door: </b><span id="doorStatus">locked</span></p></div>
+            <div><p><b>Ignition: </b><span id="ignitionStatus">disabled</span></p></div>
+            <div><p><b>Telematics:</b></p></div>
+            <div><p>Odometer: <span id="odometerStatus"></span></p></div>
+            <div><p>Fuel Level (abs.): <span id="fuelLevelAbsoluteStatus"></span></p></div>
+            <div><p>Fuel Level (%): <span id="fuelLevelPercentageStatus"></span></p></div>
+            <div><p><b>Location:</b></p></div>
+            <div><p>Longitude: <span id="longitudeStatus"></span></p></div>
+            <div><p>Latitude: <span id="latitudeStatus"></span></p></div>
+            <div><p>Accuracy: <span id="accuracyStatus"></span></p></div>
+        </div>
         <div id="deviceready" class="wrapper">
             <button class="buttons" id="connect">Connect</button>
             <button class="buttons" id="disconnect">Disconnect</button>
@@ -25,13 +37,6 @@
             <button class="buttons" id="disableIgnition">Disable Ignition</button>
             <button class="buttons" id="telematics">Telematics</button>
             <button class="buttons" id="location">Location</button>
-        </div>
-        <div class="status">
-            <div><p>Connection: <span id="connectionStatus">disconnected</span></p></div>
-            <div><p>Door: <span id="doorStatus">locked</span></p></div>
-            <div><p>Ignition: <span id="ignitionStatus">disabled</span></p></div>
-            <div><p>Telematics: <span id="telematicsStatus"></span></p></div>
-            <div><p>Location: <span id="locationStatus"></span></p></div>
         </div>
     </div>
     <script src="cordova.js"></script>

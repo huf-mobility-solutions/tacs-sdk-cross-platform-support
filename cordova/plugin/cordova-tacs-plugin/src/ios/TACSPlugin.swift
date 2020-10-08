@@ -35,8 +35,6 @@ import SecureAccessBLE
         
         print("TACS initializing plugin...")
         
-        // let vehicleAccessGrantId: String = "MySampleAccessGrantId"
-        
         let queue = DispatchQueue(label: "com.hufsm.tacs")
         
         self.tacsManager = TACSManager(queue: queue)
@@ -356,7 +354,7 @@ import SecureAccessBLE
                         "message": "Could not request door status, queue is full.",
                     ])
                 case .enableIgnition, .disableIgnition, .ignitionStatus:
-                    self.dispatchEvent("engineStatusChanged", detail: [
+                    self.dispatchEvent("ignitionStatusChanged", detail: [
                         "state": "error",
                         "message": "Could not request engine status, queue is full.",
                     ])
