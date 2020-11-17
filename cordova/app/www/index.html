@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/index.css">
+    <title>TACS Cordova Demo</title>
+</head>
+
+<body>
+    <div class="app">
+        <div class="status">
+            <div><p><b>Connection: </b><span id="connectionStatus">disconnected</span></p></div>
+            <div><p><b>Door: </b><span id="doorStatus">locked</span></p></div>
+            <div><p><b>Ignition: </b><span id="ignitionStatus">disabled</span></p></div>
+            <div><p><b>Telematics:</b></p></div>
+            <div><p>Odometer: <span id="odometerStatus"></span></p></div>
+            <div><p>Fuel Level (abs.): <span id="fuelLevelAbsoluteStatus"></span></p></div>
+            <div><p>Fuel Level (%): <span id="fuelLevelPercentageStatus"></span></p></div>
+            <div><p><b>Location:</b></p></div>
+            <div><p>Longitude: <span id="longitudeStatus"></span></p></div>
+            <div><p>Latitude: <span id="latitudeStatus"></span></p></div>
+            <div><p>Accuracy: <span id="accuracyStatus"></span></p></div>
+        </div>
+        <div id="deviceready" class="wrapper">
+            <button class="buttons" id="connect">Connect</button>
+            <button class="buttons" id="disconnect">Disconnect</button>
+            <button class="buttons" id="unlock">Unlock</button>
+            <button class="buttons" id="lock">Lock</button>
+            <button class="buttons" id="enableIgnition">Enable Ignition</button>
+            <button class="buttons" id="disableIgnition">Disable Ignition</button>
+            <button class="buttons" id="telematics">Telematics</button>
+            <button class="buttons" id="location">Location</button>
+        </div>
+    </div>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

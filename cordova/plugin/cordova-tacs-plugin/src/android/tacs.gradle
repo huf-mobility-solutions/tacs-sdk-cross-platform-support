@@ -1,0 +1,48 @@
+// Delete all that is not needed
+
+allprojects {
+    configurations.all {
+        // Override configurations
+    }
+    repositories {
+        google()
+        jcenter()
+        // Configure repositories
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
+}
+
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://maven.google.com" }
+    }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.2.0'
+    }
+}
+
+
+dependencies {
+    // Add dependencies
+    implementation(name:'ble', ext:'aar')
+    implementation(name:'tacs', ext:'aar')
+    
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.karumi:dexter:5.0.0'
+
+    implementation 'com.madgag.spongycastle:core:1.58.0.0'
+    implementation 'com.madgag.spongycastle:prov:1.58.0.0'
+}
+
