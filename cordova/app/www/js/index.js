@@ -1,3 +1,4 @@
+/// <reference types="cordova-plugin-tacs" />
 
 /**
  * This is called when the Cordova is initialized. 
@@ -12,7 +13,6 @@ const handleDeviceReady = () => {
     const connectionStatus = document.getElementById("connectionStatus")
     const doorStatus = document.getElementById("doorStatus")
     const ignitionStatus = document.getElementById("ignitionStatus")
-    const locationStatus = document.getElementById("locationStatus")
     const odometerStatus = document.getElementById("odometerStatus")
     const fuelLevelAbsoluteStatus = document.getElementById("fuelLevelAbsoluteStatus")
     const fuelLevelPercentageStatus = document.getElementById("fuelLevelPercentageStatus")
@@ -78,7 +78,6 @@ const handleDeviceReady = () => {
                 fuelLevelPercentageStatus.textContent = event.detail.value + " " + event.detail.unit
                 break
         }
-        telematicsStatus.textContent = event.detail.type + " " + event.detail.value +  " " + event.detail.unit
     })
     
     document.addEventListener("tacs:locationChanged", event => {
@@ -90,8 +89,11 @@ const handleDeviceReady = () => {
     // Get the keyring json
     const keyring = getKeyring()
 
+    // Get the access grant ID of the vehicle you want to access
+    const accessGrantId = getAccessGrantId()
+
     // Build the keyring once the device is ready
-    TACS.initialize("164c64fa-ffe2-44f0-9909-09bc90215e5b", keyring)
+    TACS.initialize(accessGrantId, keyring)
         .catch(() => alert("Initialization failed"))
 }
 
@@ -107,4 +109,12 @@ const getKeyring = () => {
         "tacsSorcBlobTable": [],
         "tacsSorcBlobTableVersion": ""
     }
+}
+/**
+ * Local function to get the keyring. Paste the access grant id of the vehicle 
+ * you want to access here. This is located in the tacsLeaseTokenTable of your 
+ * TACS keyring.
+ */
+const getAccessGrantId = () => {
+    return ""
 }

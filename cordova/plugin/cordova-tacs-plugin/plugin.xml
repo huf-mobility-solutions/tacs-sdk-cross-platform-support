@@ -6,13 +6,7 @@
     <js-module name="TACS" src="www/TACS.js">
         <clobbers target="TACS"/>
     </js-module>
-
-    <platform name="browser">
-        <js-module src="src/browser/HufProxy.js" name="HufProxy">
-            <runs />
-        </js-module>
-    </platform>
-
+    
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TACSPlugin">

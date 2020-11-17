@@ -3,6 +3,7 @@
 pushd plugin/cordova-tacs-plugin
 
 npm run build
+npm run docs
 
 popd
 

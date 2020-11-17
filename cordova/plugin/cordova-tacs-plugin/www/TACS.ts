@@ -1,9 +1,13 @@
-import { PluginEvent, Keyring, TACS } from "./contracts";
+import { Keyring, TACS } from "./index";
 
 const packageName = "TACSPlugin"
 
-const createTACS = () => {
+type PluginEvent = {
+  type: string
+  detail: any
+}
 
+const createTACS = () => {
 
   const setupEventChannel = () => new Promise((resolve, reject) => {
 
