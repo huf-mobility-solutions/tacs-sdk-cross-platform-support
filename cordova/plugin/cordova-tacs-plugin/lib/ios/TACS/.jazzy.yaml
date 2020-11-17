@@ -1,0 +1,7 @@
+author: 'Huf Secure Mobile GmbH' 
+github_url: "https://github.com/huf-mobility-solutions/mobile-ios-tacs"
+xcodebuild_arguments: [build,-workspace,Example/TACS.xcworkspace,-scheme,TACS-framework] 
+module: 'TACS'
+output: 'Docs'
+min_acl: 'internal' # Could also be 'private'
+

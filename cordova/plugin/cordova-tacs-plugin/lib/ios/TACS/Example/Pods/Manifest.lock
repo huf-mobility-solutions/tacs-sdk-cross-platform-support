@@ -1,0 +1,45 @@
+PODS:
+  - CryptoSwift (1.0.0)
+  - Nimble (8.0.1)
+  - Quick (2.0.0)
+  - SecureAccessBLE (3.13.0):
+    - CryptoSwift (= 1.0.0)
+  - SwiftFormat/CLI (0.44.10)
+  - SwiftLint (0.28.0)
+  - TACS (1.6.1):
+    - SecureAccessBLE
+
+DEPENDENCIES:
+  - Nimble (= 8.0.1)
+  - Quick (= 2.0.0)
+  - SecureAccessBLE (= 3.13.0)
+  - SwiftFormat/CLI
+  - SwiftLint (= 0.28.0)
+  - TACS (from `../`)
+
+SPEC REPOS:
+  "git@github.com:hufsm/mobile-ios-podspecs.git":
+    - SecureAccessBLE
+  trunk:
+    - CryptoSwift
+    - Nimble
+    - Quick
+    - SwiftFormat
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  TACS:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
+  Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
+  Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
+  SecureAccessBLE: da44ebf08f514df77e865b92bcdefc2c85706ba4
+  SwiftFormat: b72e592ea0979aeee53f6052abff291181364933
+  SwiftLint: 088cfacb75b45970017e62b7524d506776d60148
+  TACS: 0be11d970c49c4d318f60c79c4c3c0e17b12f467
+
+PODFILE CHECKSUM: aa40c352e44731be9df4458d5afb58aa5ce2e08e
+
+COCOAPODS: 1.9.1
