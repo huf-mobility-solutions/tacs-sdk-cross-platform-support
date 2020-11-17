@@ -12,14 +12,14 @@ const createTACS = () => {
   const setupEventChannel = () => new Promise((resolve, reject) => {
 
     const handleEvent = (event: PluginEvent) => {
-    
+
       const customEvent = new CustomEvent(event.type, { detail: event.detail })
-  
+
       document.dispatchEvent(customEvent)
     }
 
     const handleInitialized = () => {
-      
+
       document.removeEventListener("tacs:initialized", handleInitialized)
 
       resolve()
