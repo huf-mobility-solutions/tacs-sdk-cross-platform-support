@@ -2,8 +2,8 @@ import TACS
 import SecureAccessBLE
 import React
 
-@objc(Tacs)
-class Tacs: RCTEventEmitter {
+@objc(TACSPlugin)
+class TACSPlugin: RCTEventEmitter {
     
     enum TACSError : Error {
         case bluetoothDisabled
@@ -12,6 +12,10 @@ class Tacs: RCTEventEmitter {
 
     private var tacsManager: TACSManager!
     private var disposeBag: DisposeBag!
+    
+    override class func requiresMainQueueSetup() -> Bool {
+        return false
+    }
 
     /**
     Initialize the plugin by building the TACS Manager with necessary keyring provided by the app.
@@ -48,6 +52,7 @@ class Tacs: RCTEventEmitter {
      On connect BLE requested, the TACS library starts scanning for the device with the SORC ID
        that was present in the keyring.
      */
+    @objc(connect:withRejecter:)
     func connect(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
 
         print("TACS connecting...")
@@ -64,7 +69,7 @@ class Tacs: RCTEventEmitter {
             case .success:
                 resolve("")
             case .failure(let error):
-                reject("E_CONNECTING_FALIED", error.localizedDescription, error)
+                reject("E_CONNECTING_FAILED", error.localizedDescription, error)
             }
         }
 
@@ -113,6 +118,8 @@ class Tacs: RCTEventEmitter {
     /**
      On disconnect BLE requested, the TACS library disconnects any active BLE connection
     */
+    
+   @objc(disconnect:withRejecter:)
     func disconnect(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS disconnecting...")
@@ -128,6 +135,7 @@ class Tacs: RCTEventEmitter {
     /**
      On location requested, the TACS library is requested for the location data of the sorc
     */
+    @objc(requestLocation:withRejecter:)
     func requestLocation(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS request location")
@@ -140,6 +148,7 @@ class Tacs: RCTEventEmitter {
     /**
      On telematics requested, the TACS library is requested for the telematics data of the sorc
     */
+    @objc(requestTelematicsData:withRejecter:)
     func requestTelematicsData(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS request telematics data")
@@ -152,6 +161,7 @@ class Tacs: RCTEventEmitter {
     /**
      On lock requested, the TACS library is requested for the door lock
     */
+    @objc(lock:withRejecter:)
     func lock(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS engaging lock...")
@@ -165,6 +175,7 @@ class Tacs: RCTEventEmitter {
     /**
      On unlock requested, the TACS library is requested for the door unlock
     */
+    @objc(unlock:withRejecter:)
     func unlock(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS disengaging lock...")
@@ -178,6 +189,7 @@ class Tacs: RCTEventEmitter {
     /**
      On engine off requested, the TACS library is requested for the engine off
     */
+    @objc(enableIgnition:withRejecter:)
     func enableIgnition(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS enable ignition...")
@@ -191,6 +203,7 @@ class Tacs: RCTEventEmitter {
     /**
      On engine off requested, the TACS library is requested for the engine off
     */
+    @objc(disableIgnition:withRejecter:)
     func disableIgnition(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
 
         print("TACS disable ignition...")
@@ -211,6 +224,8 @@ class Tacs: RCTEventEmitter {
      6. Any location data change that includes latitutde, longitude and accuracy values
     */
     private func registerSubscriptions() {
+        
+        self.disposeBag.dispose()
 
         // Subscribe to bluetooth state signal
         tacsManager.bluetoothState.subscribe { [weak self] bluetoothState in
@@ -263,12 +278,12 @@ class Tacs: RCTEventEmitter {
 
         switch discoveryChange.action {
         case .discoveryStarted(_):
-            self.dispatchEvent("discoveryStarted")
+            self.dispatchEvent("discoveryStateChanged", detail: ["state": "discoveryStarted"])
         case .discovered(_):
-            self.dispatchEvent("discovered")
+            self.dispatchEvent("discoveryStateChanged", detail: ["state": "discovered"])
             tacsManager.connect()
         case .discoveryFailed:
-            self.dispatchEvent("discoveryFailed")
+            self.dispatchEvent("discoveryStateChanged", detail: ["state": "discoveryFailed"])
         default:
             break
         }
@@ -425,9 +440,7 @@ class Tacs: RCTEventEmitter {
         return [
             "initialized",
             "bluetoothStateChanged",
-            "discoveryStarted",
-            "discovered",
-            "discoveryFailed",
+            "discoveryStateChanged",
             "connectionStateChanged",
             "doorStatusChanged",
             "ignitionStatusChanged",

@@ -64,6 +64,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the connectionStateChanged event
      * document.addEventListener("tacs:connectionStateChanged", event => {
      *     // Access the updated connection state
@@ -74,6 +75,7 @@ export declare type TACS = {
      * // Initialize the TACS plugin and connect.
      * TACS.initialize(accessGrantId, keyring)
      *     .then(() => TACS.connect())
+     * ```
      */
     connect: () => Promise<void>;
     /**
@@ -85,6 +87,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the connectionStateChanged event
      * document.addEventListener("tacs:connectionStateChanged", event => {
      *     // Access the updated connection state
@@ -95,6 +98,7 @@ export declare type TACS = {
      * // Disconnect sometime after the plugin has been initialized and a
      * // connection has been established.
      * TACS.disconnect()
+     * ```
      */
     disconnect: () => Promise<void>;
     /**
@@ -106,6 +110,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the doorStatusChanged event
      * document.addEventListener("tacs:doorStatusChanged", event => {
      *     // Access the updated door status
@@ -116,6 +121,7 @@ export declare type TACS = {
      * // Call the lock command sometime after the plugin has been initialized
      * // and a connection has been established.
      * TACS.lock()
+     * ```
      */
     lock: () => Promise<void>;
     /**
@@ -127,6 +133,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the doorStatusChanged event
      * document.addEventListener("tacs:doorStatusChanged", event => {
      *     // Access the updated door status
@@ -137,6 +144,7 @@ export declare type TACS = {
      * // Call the unlock command sometime after the plugin has been initialized
      * // and a connection has been established.
      * TACS.unlock()
+     * ```
      */
     unlock: () => Promise<void>;
     /**
@@ -149,6 +157,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the ignitionStatusChanged event
      * document.addEventListener("tacs:ignitionStatusChanged", event => {
      *     // Access the updated ignition status
@@ -159,6 +168,7 @@ export declare type TACS = {
      * // Call the enable ignition command sometime after the plugin has been
      * // initialized and a connection has been established.
      * TACS.enableIgnition()
+     * ```
      */
     enableIgnition: () => Promise<void>;
     /**
@@ -171,6 +181,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the ignitionStatusChanged event
      * document.addEventListener("tacs:ignitionStatusChanged", event => {
      *     // Access the updated ignition status
@@ -181,6 +192,7 @@ export declare type TACS = {
      * // Call the disnable ignition command sometime after the plugin has been
      * // initialized and a connection has been established.
      * TACS.disableIgnition()
+     * ```
      */
     disableIgnition: () => Promise<void>;
     /**
@@ -193,6 +205,7 @@ export declare type TACS = {
      * event.
      *
      * @example
+     * ```ts
      * // Subscribe to the telematicsDataChanged event
      * document.addEventListener("tacs:telematicsDataChanged", event => {
      *     // Determine the type of telematics data that has changed and access
@@ -231,6 +244,7 @@ export declare type TACS = {
      * // Call the request telematics data command sometime after the plugin has
      * // been initialized and a connection has been established.
      * TACS.requestTelematicsData()
+     * ```
      */
     requestTelematicsData: () => Promise<void>;
     /**
@@ -242,6 +256,7 @@ export declare type TACS = {
  * Location updates will be published using a separate event.
  *
  * @example
+ * ```ts
  * // Subscribe to the locationChanged event
  * document.addEventListener("tacs:telematicsDataChanged", event => {
  *     const longitude = event.detail.longitude
@@ -254,6 +269,7 @@ export declare type TACS = {
  * // Call the request location command sometime after the plugin has been
  * // initialized and a connection has been established.
  * TACS.requestLocation()
+ * ```
  */
     requestLocation: () => Promise<void>;
 };
